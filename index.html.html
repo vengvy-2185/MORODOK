@@ -305,9 +305,9 @@ body,.pg{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;fo
       <button class="btn" id="saveBtn"><svg class="i"><use href="#i-save"/></svg>រក្សាទុកអតិថិជន</button>
       <button class="btn sec" id="demoBtn">បំពេញគំរូ</button>
       <button class="btn sec" id="clearBtn">សម្អាត</button>
-      <button class="btn sec js-pdf" id="pdfAll2" hidden><svg class="i"><use href="#i-save"/></svg>PDF ទាំង ៤ ទំព័រ</button>
+      <button class="btn sec js-pdf" id="pdfAll2"><svg class="i"><use href="#i-save"/></svg>PDF ទាំង ៤ ទំព័រ</button>
     </div>
-    <aside class="live" id="live"><div class="lhead"><b>មើលឯកសារផ្ទាល់</b><span>ប្តូរភ្លាមៗពេលអ្នកវាយ</span></div><div class="lacts"><a class="btn sm" id="tgLink2" href="#" target="_blank" rel="noopener"><svg class="i" style="width:18px;height:18px"><use href="#i-send"/></svg>ផ្ញើតាម Telegram</a><button class="btn sm sec" id="tgDirect">ផ្ញើ Bot ផ្ទាល់</button><button class="btn sm sec" id="saveBtn2"><svg class="i" style="width:18px;height:18px"><use href="#i-save"/></svg>រក្សាទុកអតិថិជន</button><button class="btn sm sec js-pdf" id="pdfAll3" hidden>PDF ទាំង ៤ ទំព័រ</button><button class="btn sm sec" id="copyBtn2">ចម្លងសេចក្តីសង្ខេប</button></div><div class="chips" id="lChips"></div><div class="stage" id="lstage"></div></aside>
+    <aside class="live" id="live"><div class="lhead"><b>មើលឯកសារផ្ទាល់</b><span>ប្តូរភ្លាមៗពេលអ្នកវាយ</span></div><div class="lacts"><a class="btn sm" id="tgLink2" href="#" target="_blank" rel="noopener"><svg class="i" style="width:18px;height:18px"><use href="#i-send"/></svg>ផ្ញើតាម Telegram</a><button class="btn sm sec" id="tgDirect">ផ្ញើ Bot ផ្ទាល់</button><button class="btn sm sec" id="saveBtn2"><svg class="i" style="width:18px;height:18px"><use href="#i-save"/></svg>រក្សាទុកអតិថិជន</button><button class="btn sm sec js-pdf" id="pdfAll3">PDF ទាំង ៤ ទំព័រ</button><button class="btn sm sec" id="copyBtn2">ចម្លងសេចក្តីសង្ខេប</button></div><div class="chips" id="lChips"></div><div class="stage" id="lstage"></div></aside>
     <p class="note">ការបំពេញត្រូវបានរក្សាទុកដោយស្វ័យប្រវត្តិក្នុងទូរស័ព្ទនេះ។ ប៉ះប៊ូតុងពណ៌ (រង្វង់ខាងស្តាំ) ដើម្បីប្តូរពណ៌អក្សរដែលបានបំពេញ។</p>
   </section>
 
@@ -318,7 +318,7 @@ body,.pg{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;fo
     <div class="chips" id="docChips" role="tablist"></div>
     <div class="zoom"><button id="zOut" aria-label="បង្រួម">−</button><span id="zLbl">សមទំហំ</span><button id="zFit" aria-label="សមទំហំ" style="width:auto;padding:0 12px;font-size:14px">សម</button><button id="zIn" aria-label="ពង្រីក">+</button></div>
     <div class="stage" id="stage"></div>
-    <div class="acts"><button class="btn js-pdf" id="pdfAll" hidden><svg class="i"><use href="#i-save"/></svg>រក្សាទុក PDF ទាំង ៤ ទំព័រ</button><button class="btn sec js-pdf" id="pdfOne" hidden><svg class="i"><use href="#i-save"/></svg>PDF ឯកសារនេះ</button></div>
+    <div class="acts"><button class="btn js-pdf" id="pdfAll"><svg class="i"><use href="#i-save"/></svg>រក្សាទុក PDF ទាំង ៤ ទំព័រ</button><button class="btn sec js-pdf" id="pdfOne"><svg class="i"><use href="#i-save"/></svg>PDF ឯកសារនេះ</button></div>
     <div class="acts"><a class="btn" id="tgLink" href="#" target="_blank" rel="noopener"><svg class="i"><use href="#i-send"/></svg>ផ្ញើតាម Telegram</a><button class="btn sec" id="copyBtn">ចម្លងសេចក្តីសង្ខេប</button></div>
   </section>
 
@@ -580,7 +580,7 @@ function loadRecs(){try{return JSON.parse(tryLS.get("sky_customers")||"{}")}catc
 function paintReports(){
   const R=loadRecs(),names=Object.keys(R);
   $("stN").textContent=kn(names.length);$("stM").textContent=kn(names.reduce((a,n)=>a+(+R[n].price||0),0).toLocaleString("en-US"))+" $";
-  $("reps").innerHTML=DOCS.map((d,i)=>`<div class="card rep" style="--i:${i}"><div class="thumb" style="--s:.1"><div class="pgw">${pgHTML(d.pages[0])}</div></div><div><h3>${d.t}</h3><p>${d.m}</p><div class="acts"><button class="btn sm" data-k="${d.k}"><svg class="i" style="width:18px;height:18px"><use href="#i-eye"/></svg>មើល</button><button class="btn sm sec js-pdf" data-pdf="${d.k}"${DL?"":" hidden"}>PDF</button></div></div></div>`).join("");
+  $("reps").innerHTML=DOCS.map((d,i)=>`<div class="card rep" style="--i:${i}"><div class="thumb" style="--s:.1"><div class="pgw">${pgHTML(d.pages[0])}</div></div><div><h3>${d.t}</h3><p>${d.m}</p><div class="acts"><button class="btn sm" data-k="${d.k}"><svg class="i" style="width:18px;height:18px"><use href="#i-eye"/></svg>មើល</button><button class="btn sm sec js-pdf" data-pdf="${d.k}">PDF</button></div></div></div>`).join("");
   $("reps").querySelectorAll("[data-pdf]").forEach(b=>b.onclick=()=>savePDF(DOCS.find(x=>x.k===b.dataset.pdf).pages,pdfName(b.dataset.pdf)));
   $("reps").querySelectorAll(".rep").forEach(r=>{const th=r.querySelector(".thumb"),s=(th.clientWidth||96)/793.7;th.style.setProperty("--s",s.toFixed(4))});
   $("reps").querySelectorAll("button[data-k]").forEach(b=>b.onclick=()=>{doc=b.dataset.k;$("stage").innerHTML="";go("view")});
@@ -629,9 +629,8 @@ async function buildPDF(keys){
   host.innerHTML="";return pdf.output("blob");
 }
 async function savePDF(keys,fname){
-  if(pdfBusy)return;if(!DL){toast("រក្សាទុក PDF មិនអាចប្រើនៅទីនេះ");return}
-  pdfBusy=true;document.body.classList.add("busy");toast("កំពុងបង្កើត PDF… សូមរង់ចាំ");
-  try{const blob=await buildPDF(keys);await DL.save({filename:fname,data:blob});toast("បានរក្សាទុក PDF ✔")}
+  if(pdfBusy)return;  pdfBusy=true;document.body.classList.add("busy");toast("កំពុងបង្កើត PDF… សូមរង់ចាំ");
+  try{const blob=await buildPDF(keys);if(DL)await DL.save({filename:fname,data:blob});else{const u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download=fname;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000)}toast("បានរក្សាទុក PDF ✔")}
   catch(e){toast(e&&e.code==="declined"?"បានបោះបង់ការរក្សាទុក":"បង្កើត PDF មិនបានទេ សូមសាកម្តងទៀត")}
   finally{pdfBusy=false;document.body.classList.remove("busy");$("pdfhost").innerHTML=""}
 }
