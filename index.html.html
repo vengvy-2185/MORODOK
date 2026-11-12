@@ -400,6 +400,7 @@ const SEC=[
   {id:"qty",l:"ចំនួន (គ្រឿង)",type:"number",mode:"numeric"},
   {id:"cdate",l:"ថ្ងៃចុះកិច្ចសន្យា",type:"date"},
   {id:"months",l:"រយៈពេលជួល",seg:[3,6,9,12],suffix:" ខែ",full:1},
+  {id:"edate",l:"ថ្ងៃបញ្ចប់កិច្ចសន្យា (វាយដៃ)",type:"date",full:1},
   {id:"price",l:"តម្លៃជួល/ខែ (USD)",type:"number",mode:"decimal"},
   {id:"day",l:"បង់ប្រចាំខែ ថ្ងៃទី",select:1},
   {id:"fine",l:"ពិន័យយឺត/ថ្ងៃ (USD)",type:"number",mode:"decimal"},
@@ -450,7 +451,7 @@ function build(){
   const dd=Math.min(+S.day||cd.getDate(),31);
   const t=S,v1=(k,n)=>V(t[k]?String(t[k]).trim():"",n,"g1");
   const cdD=V(ar(cd.getDate()),9,"g2"),cdM=V(MON[cd.getMonth()],9,"g2"),cdY=V(ar(cd.getFullYear()),7,"g2");
-  const enD=V(ar(end.getDate()),7,"g2"),enM=V(MON[end.getMonth()],7,"g2"),enY=V(ar(end.getFullYear()),7,"g2");
+  const ed=parse(S.edate),enD=V(ed?ar(ed.getDate()):"",7,"g2"),enM=V(ed?MON[ed.getMonth()]:"",7,"g2"),enY=V(ed?ar(ed.getFullYear()):"",7,"g2");
   const sub=(n,x)=>`<div class="sb"><span>${n}</span><p>${x}</p></div>`;
   P.c1=`<section class="pg">
 <div class="c fh n1">ព្រះរាជាណាចក្រកម្ពុជា</div>
@@ -567,7 +568,7 @@ function stats(){const filled=k=>String(S[k]??"").trim()!=="";
 function focusField(k){go("fill");const c=$("c-"+FIELD_SEC[k]);if(c&&!c.classList.contains("open")){c.classList.add("open");c.querySelector(".ah").setAttribute("aria-expanded","true")}
   setTimeout(()=>{const el=$(k);if(el){el.scrollIntoView({block:"center",behavior:"smooth"});setTimeout(()=>el.focus({preventScroll:true}),350)}},380)}
 function summary(){const t=S,cd=parse(t.cdate)||today,end=addM(cd,+t.months||6);
-  return `📄 កិច្ចសន្យាជួលទូរស័ព្ទ - SKY PHONE SHOP\n👤 ឈ្មោះ: ${t.name} (${t.sex})\n📞 ទូរស័ព្ទ: ${t.phone}\n🪪 អត្តសញ្ញាណប័ណ្ណ: ${t.idn}\n🏠 អាសយដ្ឋាន: ${t.addr}\n📱 ម៉ូដែល: ${t.model} x${t.qty}\n⏳ រយៈពេល: ${t.months} ខែ (${pd(iso(cd))} → ${pd(iso(end))})\n💵 តម្លៃ/ខែ: ${t.price} USD, បង់ថ្ងៃទី ${t.day}\n⚠️ ពិន័យ/ថ្ងៃ: ${t.fine} USD, iCloud: ${t.icl} USD`}
+  return `📄 កិច្ចសន្យាជួលទូរស័ព្ទ - SKY PHONE SHOP\n👤 ឈ្មោះ: ${t.name} (${t.sex})\n📞 ទូរស័ព្ទ: ${t.phone}\n🪪 អត្តសញ្ញាណប័ណ្ណ: ${t.idn}\n🏠 អាសយដ្ឋាន: ${t.addr}\n📱 ម៉ូដែល: ${t.model} x${t.qty}\n⏳ រយៈពេល: ${t.months} ខែ (${pd(iso(cd))} → ${pd(t.edate)})\n💵 តម្លៃ/ខែ: ${t.price} USD, បង់ថ្ងៃទី ${t.day}\n⚠️ ពិន័យ/ថ្ងៃ: ${t.fine} USD, iCloud: ${t.icl} USD`}
 function paintView(){
   $("docChips").innerHTML=DOCS.map(d=>`<button class="chip${d.k===doc?" on":""}" role="tab" data-k="${d.k}">${d.t}</button>`).join("");
   $("docChips").querySelectorAll(".chip").forEach(b=>b.onclick=()=>{doc=b.dataset.k;$("stage").innerHTML="";paintView()});
